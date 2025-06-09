@@ -5,7 +5,7 @@ import WeatherProperties from './components/WeatherProperties'
 import Spinner from './components/Spinner'
 // import useTemperatureUnit from './hooks/useTemperatureUnit'
 import { useEffect, useState } from 'react';
-import { getCurrentWeather, getHourlyForecast } from '@/services/weatherAPI';
+import { getCurrentWeather, getHourlyForecast, getDailyForecast } from '@/services/weatherAPI';
 import { useGeolocation } from '@/hooks/useGeolocation'
 
 function App() {
@@ -23,8 +23,11 @@ function App() {
           try {
             const currentData = await getCurrentWeather(coords.lat, coords.lon);
             const hourlyF = await getHourlyForecast(coords.lat, coords.lon);
+            const dailyData = await getDailyForecast(coords.lat, coords.lon);
             setCurrent(currentData);
             setForecast(hourlyF);
+            setDaily(dailyData.forecast.forecastday)
+            
           } catch (err) {
             console.error('API error:', err);
           } finally {
@@ -71,12 +74,13 @@ function App() {
 
     const weatherMetrics = [
       { name: 'Humidity', value: `${current.main.humidity}%` },
-      { name: 'Rain Chance', value: `${8}%` },
+      { name: 'Rain Chance', value: `${dailyForecast[0].day.daily_chance_of_rain}%` },
       { name: 'Feels Like', value: `${Math.round(current.main.feels_like)}°C` },
       { name: 'Wind', value: `${current.wind.speed} m/s` },
       { name: 'Visibility', value: `${current.visibility} m` },
-      { name: 'Sunrise', value: `${new Date(current.sys.sunrise).toLocaleTimeString('en-GB', options)}` },
-      { name: 'Sunset', value: `${new Date(current.sys.sunset).toLocaleTimeString('en-GB', options)}` },
+      { name: 'Sunrise', value: `${dailyForecast[0].astro.sunrise}` },
+      { name: 'Sunset', value: `${dailyForecast[0].astro.sunset}` },
+      { name: 'UV Index', value: `${dailyForecast[0].day.uv}` },
     ]    
 
     return (

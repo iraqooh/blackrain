@@ -27,3 +27,17 @@ export const getHourlyForecast = async (lat, lon, units = 'metric') => {
   
   return data;
 };
+
+const base_url = 'http://api.weatherapi.com/v1'
+
+export const getDailyForecast = async (lat, lon) => {
+  const { data } = await axios.get(`${base_url}/forecast.json`, {
+    params: {
+      key: "6c64ea03718d4ce7b3a172055250906",
+      q: `${lat},${lon}`,
+      days: 7
+    },
+  });
+  
+  return data;
+};
