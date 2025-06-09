@@ -9,7 +9,7 @@ function CityTile({ removable=false, removeLogic=null, weatherData }) {
     <div
         className="relative flex justify-between items-center rounded-lg px-4 py-3 mb-4 bg-cover bg-center overflow-hidden bg-slate-500 bg-blend-overlay"
         style={{
-        backgroundImage: `url('/${weatherData.description}${dn}.jpg')`,
+        backgroundImage: `url('/${weatherData.description.toLowerCase()}${dn}.jpg')`,
         backgroundBlendMode: 'overlay'
         }}
     >

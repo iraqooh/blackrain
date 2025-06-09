@@ -77,11 +77,10 @@ function App() {
       { name: 'Visibility', value: `${current.visibility} m` },
       { name: 'Sunrise', value: `${new Date(current.sys.sunrise).toLocaleTimeString('en-GB', options)}` },
       { name: 'Sunset', value: `${new Date(current.sys.sunset).toLocaleTimeString('en-GB', options)}` },
-    ]
-    
+    ]    
 
     return (
-      <div className={`min-h-screen bg-cover bg-center text-white font-bold bg-[url('/${weatherNow.description}${dn}.jpg')] bg-blend-lighten bg-fixed`}>
+      <div className={`min-h-screen bg-cover bg-center text-white font-serif font-bold bg-blend-lighten bg-fixed`} style={{ backgroundImage: `url('/${weatherNow.description.toLowerCase()}${dn}.jpg')`}}>
         <Navbar isAuthenticated={true} weatherNow={weatherNow} />
           <main className="p-4 pt-20">
             {/* Weather sections */}
