@@ -81,7 +81,7 @@ function App() {
     
 
     return (
-      <div className={`min-h-screen bg-cover bg-center text-white bg-[url('/${weatherNow.description}${dn}.jpg')] bg-blend-lighten bg-fixed`}>
+      <div className={`min-h-screen bg-cover bg-center text-white font-bold bg-[url('/${weatherNow.description}${dn}.jpg')] bg-blend-lighten bg-fixed`}>
         <Navbar isAuthenticated={true} weatherNow={weatherNow} />
           <main className="p-4 pt-20">
             {/* Weather sections */}
